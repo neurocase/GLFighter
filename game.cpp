@@ -53,7 +53,7 @@ void Game::run()
 				}
 				
 				usleep(tSleep);
-				if ((timeNew - timeStored) > 5){
+				if ((timeNew - timeStored) > 2){
 					clockKeep[clockT] = tSleep;
 					clockT++;
 					if (clockT > 6){
