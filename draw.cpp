@@ -1,81 +1,73 @@
-void display()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-	
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include "game.h"
+#include "draw.h"
+#include "alien.h"
+#include <ctime>
+#include <cmath>
+#include <iostream>
+#include <unistd.h>
+#include <string>
+#include <set>
 
+std::set<std::string> debug;
+
+void PrintOnce(std::string key, std::string message) {
+	if (debug.insert(key).second) {
+	   std::cout << message << std::endl;
+	}
+}
+
+Draw::Draw()
+{
+	
+}
+
+
+
+void Draw::DrawBoundaries(){
   // DRAW BOUNDARIES 
-  
+	PrintOnce("boundary", "Boundary has been drawn");
+	glColor3f(1,1,1);
     glBegin(GL_LINES);
 		glVertex3f(1.5, 0, -10.0);
-		glVertex3f(1.5, 4, -10.0);
+		glVertex3f(1.5, 5, -10.0);
 		glVertex3f(-1.5, 0, -10.0);
-		glVertex3f(-1.5, 4, -10.0);
+		glVertex3f(-1.5, 5, -10.0);
 	glEnd();
-
+} 
 	
-	glColor3f(1,1,0);
-	glTranslated(0,-2,0);
-    glBegin(GL_TRIANGLES);
-        glVertex3f(SpaceShipX-0.2, 0.0, -10.0);
-        glVertex3f(SpaceShipX, 0.2, -10.0);
-        glVertex3f(SpaceShipX+0.2, 0.0, -10.0);
+void Draw::DrawAlien(double alX, double alY)
+{
+	
+	PrintOnce("aliens", "Alien has been drawn");
+	glColor3f(0,1,0);
+	
+	glBegin(GL_TRIANGLES);  
+        glVertex3f(alX-0.1, alY+0.1, -10.0);
+        glVertex3f(alX, alY-0.1, -10.0);
+        glVertex3f(alX+0.1, alY+0.1, -10.0);
     glEnd();
 	
-	
+}
 
-	
-	timeNew = dazTime();
 
-	if ((spwnedAliens < totNumAliens-1) && ((timeNew - timeStored) > 3)) {
-		std::cout << "SPAWNING" << "spnd" << spwnedAliens << "tot" << totNumAliens << std::endl;
-		spwnedAliens++;
-		spawnAlien(steveAlien, 1);	
-		timeStored = dazTime();
-	}else if ((timeNew - timeStored) > 3){
-		std::cout << "NOT SPAWNING" << std::endl;
-		timeStored = dazTime();
-	}
+void Draw::DrawPlayer(double myX){
 	
-	for(int i = 0; i < spwnedAliens; i++){
-		
-	drawAlien(steveAlien, i);
-		moveAlien(deltaT, steveAlien, i, spwnedAliens);
-	}
-		
+	PrintOnce("drawplayer", "Player has been drawn");
+	glColor3f(1,1,0);
+	glTranslated(0,-1.5,0);
+    glBegin(GL_TRIANGLES);
+        glVertex3f(myX-0.2, 0.0, -10.0);
+        glVertex3f(myX, 0.2, -10.0);
+        glVertex3f(myX+0.2, 0.0, -10.0);
+    glEnd();
 	
-	//}
-	
-	
-/*	clock_t t = clock();
-	double now = t / (double)CLOCKS_PER_SEC;
-	deltaT = now - lastTime;
-    lastTime = now;
-    std::cout << "t: " << t << " now: " << now << " lastt :" << lastTime << "deltaT: " << deltaT << std::endl;
-    */
-    deltaT = 0.005;
-	
-	
-	glColor3f(1,0,0);
-	if (isBulletActive == true){
-		glBegin(GL_LINES);
-		glVertex3f(BulletX, BulletY, -10.0);
-		glVertex3f(BulletX, BulletY+0.1, -10.0);
-		if (BulletY > 4){
-			isReloaded = true;
-		}
-		glEnd();
-		BulletY+=deltaT * 20;
-	}
-	
-	if (bulletHitAlien(steveAlien, 1)){
-		steveAlien[1].isAlienAlive = false;
-	}
-	
-	glutSwapBuffers();
-		
+}
 
+
+Draw::~Draw()
+{
 	
-	
-		
 }

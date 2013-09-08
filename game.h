@@ -1,8 +1,3 @@
-#include <ctime>
-#include <cmath>
-#include <iostream>
-#include <unistd.h>
-
 #ifndef GAME_H
 #define	GAME_H
 
@@ -16,32 +11,14 @@ class Game{
 	public:
 		
 		Game();
-		void run();
+		void run(int argc, char **argv);
+		void GameLoop();
+		void Reshape(int w, int h);
 		long getTime();	
+		void setMyShipX(double myS);
 		~Game();
 	
 	
 };
 
-
-
 #endif
-
-/*
-
-long timeStored = dazTime();
-long timeNew = dazTime();
-
-
-
-
-long dazTime(){
-	time_t dTime;
-	long timeA = time(&dTime);
-	return timeA;
-}
-
-
-
-
-*/

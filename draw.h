@@ -1,3 +1,18 @@
-#include <GL/glut.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#ifndef DRAW_H
+#define DRAW_H
+
+class Draw{
+	
+	public:
+	
+	Draw();
+	void DrawBoundaries();
+	void DrawPlayer(double myX);
+	void DrawAlien(double alX, double alY);
+	~Draw();
+	
+	
+};
+
+
+#endif 
