@@ -42,9 +42,6 @@ Player::Player()
 	ShipXPos = 0;
 	reloaded = true;
 	
-	laserPos pLaserPos = new laserPos[3];
-	
-	
 	for (int i = 0; i < 3; i++)
 	{
 		pLaserPos[i].lx = 0;
@@ -53,7 +50,7 @@ Player::Player()
 	}
 }
 
-struct pLaserPos Player::getLaserPos(int n)
+Player::laserPos Player::getLaserPos(int n)
 {
 	return (pLaserPos[n]);
 }

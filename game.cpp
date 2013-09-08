@@ -22,6 +22,7 @@ long nowTime = 0;
 Draw draweth;
 std::vector<Alien> myAliens;
 
+
 Game::Game()
 {
 	
@@ -90,8 +91,7 @@ void Game::GameLoop()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-  
-	double playerX = ;
+
 	draweth.DrawPlayer(playerX);
 	draweth.DrawBoundaries();
 	

@@ -23,7 +23,8 @@ class Player{
 		double lx;
 		double ly;
 		bool isActive;
-	};
+	}pLaserPos[3];
+	
 	Player();
 	double getShipXPos();
 	void setShipXPos(double);
