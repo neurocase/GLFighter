@@ -7,27 +7,19 @@
 #include "game.h"
 #include "player.h"
 
-/*check for input  _
-*check for collision
-* update entity existance, player.h && cpp, enemy.h, .cpp
-* player.class maintains player health
-*draw engine
-* use Vectors instead of arrays (get glen to tech push and pop)
-* 
-* OBJECTIVES WITH SGT GRIM:
-* 
-* 	* Impliment Multiple Ship Spawn Time
-* 	* Impliment Ship Fireing
-* 	* Create appropriate timer ( currently appears not to have timer)
-* 	* Use mathamatical formulas or clever programming to make ships move in interesting ways
-* 	* Use inheritance and polymorphism to create bomber alien
-* 	* Impliment player death
+/*
+*
+*    CURRENT PROBLEMS, 
 * 
 * 
+*  - 	Difficulty understanding passing variables between multiple .cpp files.
 * 
-* 	: STRETCH GOALS :
+*  -	Difficulty passing data with pointers and addresses. 
+*   		this has created many problems, such as having both main.cpp and game.cpp co-operate with player.cpp
+* 			all though there may be simpler ways to do this, or it be easier to contain all code in one class file,
+* 			I am trying to increase my understanding of passing data to different parts of the program, over different barriers,
+* 			such as different classes/files etc.
 * 
-* 	* Import 3D model instead of triangle
 * 	
 * 
 */
@@ -37,6 +29,16 @@
 Game GameHeart;
 Player Play;
 static double myShipX = Play.getShipXPos();
+
+struct laserPos
+{
+	double lx;
+	double ly;
+	bool isActive;
+};
+
+
+
 void onKeyPress(unsigned char key, int x, int y) {
 	std::cout << "key : " << key << std::endl;
 	
@@ -49,11 +51,11 @@ void onSpecialKeyPress(int key, int x, int y) {
 		Play.setShipXPos(-0.15);
 	}else if (key == GLUT_KEY_RIGHT){
 		Play.setShipXPos(0.15);
-	}/*else if (key == GLUT_KEY_UP){
+	}else if (key == GLUT_KEY_UP){
 
-		//Play.fireLaser
+		Play.fireLaser();
 		
-	}else if (key == GLUT_KEY_DOWN){
+	}/*else if (key == GLUT_KEY_DOWN){
 	 
 		//Play.fireMisl
 	}*/

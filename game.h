@@ -1,3 +1,5 @@
+#include "player.h"
+
 #ifndef GAME_H
 #define	GAME_H
 
@@ -16,6 +18,7 @@ class Game{
 		void Reshape(int w, int h);
 		long getTime();	
 		void setMyShipX(double myS);
+		void setPlayerAddress(Player);
 		~Game();
 	
 	

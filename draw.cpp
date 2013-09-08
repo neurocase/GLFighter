@@ -26,7 +26,7 @@ Draw::Draw()
 
 
 void Draw::DrawLaser(double laserX,double laserY){
-  // DRAW BOUNDARIES 
+ 
 	PrintOnce("laser", "LASER!");
 	glColor3f(1,0.5,0);
     glBegin(GL_LINES);

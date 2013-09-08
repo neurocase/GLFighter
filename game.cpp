@@ -4,7 +4,7 @@
 #include "game.h"
 #include "draw.h"
 #include "alien.h"
-#include "player.h"
+
 #include <ctime>
 #include <cmath>
 #include <iostream>
@@ -42,7 +42,12 @@ long Game::getTime()
 	return timeA;
 }
 
-
+struct laserPos
+{
+	double lx;
+	double ly;
+	bool isActive;
+}myLaserPos[3];
 
 void Game::run(int argc, char **argv)
 {
@@ -91,7 +96,18 @@ void Game::GameLoop()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-
+	for (int i = 0; i < 3; i++)
+	{
+	//----------------------------------------------PROBLEM
+	//myLaserPos = getLaserPos(i);
+	
+		if (myLaserPos[i].isActive)
+		{
+			//pLaserPos[i].
+		}
+	
+	}
+	
 	draweth.DrawPlayer(playerX);
 	draweth.DrawBoundaries();
 	

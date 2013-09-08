@@ -35,12 +35,15 @@
 	~player();
 	
 \*/
-
+time_t dTime;
 
 Player::Player()
 {	
 	ShipXPos = 0;
 	reloaded = true;
+	
+	
+	
 	
 	for (int i = 0; i < 3; i++)
 	{
@@ -55,6 +58,33 @@ Player::laserPos Player::getLaserPos(int n)
 	return (pLaserPos[n]);
 }
 
+void Player::setLaserPos(laserPos newlaser, int n, char ch)
+{
+	switch (ch){
+		
+		case 'x':
+		pLaserPos[n].lx = newlaser.lx;
+		break;
+		
+		case 'y':
+		pLaserPos[n].ly = newlaser.ly;
+		
+		break;
+		case 't':
+		pLaserPos[n].isActive = newlaser.isActive;
+		
+		break;
+		case 'a':
+		pLaserPos[n] = newlaser;
+		
+		break;
+		default:
+		pLaserPos[n] = newlaser;
+		
+	}
+	
+}
+
 
 void Player::setShipXPos(double xPos)
 {
@@ -64,6 +94,26 @@ void Player::setShipXPos(double xPos)
 
 void Player::fireLaser(){
 	
+	timeNow = time(&dTime);
+	bool fire = false;
+	
+	if (timeNow - timeLastShoot > 1)
+	{
+		while (!fire)
+		{
+			int i = 0;
+			while ((i < 3) || (!fire))
+			{
+				if (!pLaserPos[i].isActive)
+				{
+				 pLaserPos[i].isActive = true;
+				 fire = true;
+				}
+				i++;
+			}
+		}
+		timeLastShoot = time(&dTime);
+	}
 }
 
 bool Player::isReloaded(){

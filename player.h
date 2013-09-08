@@ -14,25 +14,29 @@ class Player{
 	double laserPosY[4];
 	double mislPosX[4];
 	double mislPosY[4];
-	
+	long timeNow;
+	long timeLastShoot;
+		
 	
 	
 	public:
+
+	
+	Player();
 	struct laserPos
 	{
 		double lx;
 		double ly;
 		bool isActive;
 	}pLaserPos[3];
-	
-	Player();
 	double getShipXPos();
 	void setShipXPos(double);
 	void killPlayer();
 	void fireLaser();
 	void fireMissle();
 	bool isReloaded();
-	laserPos getLaserPos(int n);
+	laserPos getLaserPos(int);
+	void setLaserPos(laserPos, int, char);
 	
 	
 	~Player();
