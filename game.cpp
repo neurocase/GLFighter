@@ -4,6 +4,7 @@
 #include "game.h"
 #include "draw.h"
 #include "alien.h"
+#include "player.h"
 #include <ctime>
 #include <cmath>
 #include <iostream>
@@ -13,6 +14,9 @@
 double playerX= 0;
 int spwned = 0;
 int totAl = 5;
+long startTime = 0;
+long holdTime = 0;
+long nowTime = 0;
 
 
 Draw draweth;
@@ -36,6 +40,7 @@ long Game::getTime()
 	long timeA = time(&dTime);
 	return timeA;
 }
+
 
 
 void Game::run(int argc, char **argv)
@@ -66,27 +71,46 @@ void moveAlienX(Alien& alien){
 
 void Game::GameLoop()
 {
-	if(spwned < totAl)
+	if (startTime == 0){
+		startTime = getTime();
+	}
+	if (holdTime == 0){
+		startTime = getTime();
+	}
+	
+	nowTime = getTime();
+	if((spwned < totAl) && (nowTime - holdTime > 1))
 	{
 	myAliens.push_back(Alien());
 	std::cout << "create alien " << myAliens.size() << std::endl;
 	spwned++;
+	holdTime = getTime();
 	}
 	
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
   
-
+	double playerX = ;
 	draweth.DrawPlayer(playerX);
 	draweth.DrawBoundaries();
 	
+	//if laser active, laser y++
+	
 	//std::cout << "aliens " << myAliens.size() << std::endl;
-	for (int i = 0; i < myAliens.size(); i++) {
+	for (unsigned int i = 0; i < myAliens.size(); i++) {
 		Alien& alien = myAliens[i];
 		double myAlPosX = alien.getAlienPosX();
 		double myAlPosY = alien.getAlienPosY();
-		draweth.DrawAlien(myAlPosX, myAlPosY);
+		double myRot = alien.getAlienRot();
+		/*if ((alien.isGoingRight()) && (myRot < 1)){
+			myRot+=0.1;
+		}*/
+		//if ((!alien.isGoingRight()) && (myRot >-1)){
+			myRot-=0.1;
+		//}
+		alien.setAlienRot(myRot);
+		draweth.DrawAlien(myAlPosX, myAlPosY, myRot);
 		moveAlienX(alien);
 	}
 	

@@ -9,6 +9,8 @@ class Alien{
 		~Alien();
 		double getAlienPosX();
 		double getAlienPosY();
+		double getAlienRot();
+		void setAlienRot(double rot);
 		void setAlienPos(double Ax,double Ay);
 		double getAlienMovSpd();
 		bool   isGoingRight();
@@ -18,6 +20,7 @@ class Alien{
 		double AlienX;
 		double AlMovSpeed;
 		double AlienY;
+		double AlienRot;
 		bool isAlienAlive;
 		double alienSize;
 		double alienDiff; //difficulty	

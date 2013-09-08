@@ -8,7 +8,9 @@ class Draw{
 	Draw();
 	void DrawBoundaries();
 	void DrawPlayer(double myX);
-	void DrawAlien(double alX, double alY);
+	void DrawAlien(double alX, double alY, double rot);
+	void DrawMissle(double mislX, double mislY);
+	void DrawLaser(double laserX,double laserY);
 	~Draw();
 	
 	

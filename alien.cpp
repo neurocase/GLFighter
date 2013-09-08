@@ -14,12 +14,20 @@
 
 Alien::Alien(){
 	isAlienAlive = true;
-	AlienX = 0;
+	AlienX = -0.9 + rand() % 2 *1.5;
 	AlienY = 3;
+	AlienRot = 0;
 	AlMovSpeed = 0.03;
 	goRight = true;
 }
 Alien::~Alien(){
+}
+
+void Alien::setAlienRot(double rot){
+	AlienRot = rot;
+}
+double Alien::getAlienRot(){
+	return AlienRot;
 }
 double Alien::getAlienMovSpd(){
 	return AlMovSpeed;
@@ -39,8 +47,10 @@ void Alien::goOtherWay(){
 void Alien::moveStep() {
 	if (goRight){
 		AlienX += AlMovSpeed;
+		AlienY-= 0.001;
 	}else{
 		AlienX -= AlMovSpeed;
+		AlienY-= 0.005;
 	}
 }
 void Alien::setAlienPos(double Ax,double Ay){

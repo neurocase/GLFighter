@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include "game.h"
+#include "player.h"
 
 /*check for input  _
 *check for collision
@@ -15,10 +16,14 @@
 * 
 * OBJECTIVES WITH SGT GRIM:
 * 
-* 	* Create appropriate timer that can work with multiple system clock speeds and adjust usleep(), if used.
-*   * Rip apart GLSPACEINVADERS into seperate headers and classes to make it easier to work on
+* 	* Impliment Multiple Ship Spawn Time
+* 	* Impliment Ship Fireing
+* 	* Create appropriate timer ( currently appears not to have timer)
 * 	* Use mathamatical formulas or clever programming to make ships move in interesting ways
+* 	* Use inheritance and polymorphism to create bomber alien
 * 	* Impliment player death
+* 
+* 
 * 
 * 	: STRETCH GOALS :
 * 
@@ -27,9 +32,11 @@
 * 
 */
 
-static double myShipX = 0;
+
 
 Game GameHeart;
+Player Play;
+static double myShipX = Play.getShipXPos();
 void onKeyPress(unsigned char key, int x, int y) {
 	std::cout << "key : " << key << std::endl;
 	
@@ -39,15 +46,18 @@ void onSpecialKeyPress(int key, int x, int y) {
 	std::cout << "SpKey : " << key << std::endl;
 	
 	if (key == GLUT_KEY_LEFT){
-		myShipX-=0.3;
+		Play.setShipXPos(-0.15);
 	}else if (key == GLUT_KEY_RIGHT){
-		myShipX+=0.3;
-	}else if (key == GLUT_KEY_UP){
-	/*	isBulletActive = true;
-		BulletX = SpaceShipX;
-		BulletY = 0.2;*/
+		Play.setShipXPos(0.15);
+	}/*else if (key == GLUT_KEY_UP){
+
+		//Play.fireLaser
 		
-	}
+	}else if (key == GLUT_KEY_DOWN){
+	 
+		//Play.fireMisl
+	}*/
+	myShipX = Play.getShipXPos();
 	GameHeart.setMyShipX(myShipX);
 	
 }
@@ -58,14 +68,12 @@ void display() {
 void reshape(int w, int h) {
 	GameHeart.Reshape(w, h);
 }
-
 void init() // Called before main loop to set up the program
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glEnable(GL_DEPTH_TEST);
     glShadeModel(GL_SMOOTH);
 }
-
 int main(int argc, char **argv){
  glutInit(&argc, argv); // Initializes glut
 
