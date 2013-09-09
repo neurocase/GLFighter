@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall 
 LDFLAGS= -lGL -lglut
-SOURCES=main.cpp game.cpp game.h
+SOURCES=main.cpp game.cpp game.h draw.cpp draw.h alien.cpp alien.h player.h player.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=run
 
@@ -12,3 +12,6 @@ $(EXECUTABLE): $(OBJECTS)
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -f *.gch *.o run
