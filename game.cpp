@@ -21,6 +21,9 @@ long nowTime = 0;
 
 Draw draweth;
 std::vector<Alien> myAliens;
+Player Playr;
+//double& ShipXPosAdd = Playr.getShipXPosAddy();
+//setShipXPos(double xPos)
 
 
 Game::Game()
@@ -28,9 +31,16 @@ Game::Game()
 	
 }
 
+/*void Game::getGShipXPosAddy()
+{
+	long a = ShipXPosAdd;
+	return a;
+}*/
+
 void Game::setMyShipX(double myS)
 {
-	playerX = myS;
+	std::cout << "setting myS" << myS << std::endl;
+	Playr.setShipXPos(myS);
 	
 }
 
@@ -41,13 +51,6 @@ long Game::getTime()
 	long timeA = time(&dTime);
 	return timeA;
 }
-
-struct laserPos
-{
-	double lx;
-	double ly;
-	bool isActive;
-}myLaserPos[3];
 
 void Game::run(int argc, char **argv)
 {
@@ -101,13 +104,13 @@ void Game::GameLoop()
 	//----------------------------------------------PROBLEM
 	//myLaserPos = getLaserPos(i);
 	
-		if (myLaserPos[i].isActive)
+	/*	if (*Play->\\myLaserPos[i].isActive)
 		{
 			//pLaserPos[i].
-		}
+		}*/
 	
 	}
-	
+	playerX = Playr.getShipXPos();
 	draweth.DrawPlayer(playerX);
 	draweth.DrawBoundaries();
 	
@@ -143,5 +146,4 @@ void Game::GameLoop()
 
 Game::~Game()
 {
-	
-}
+} 

@@ -12,13 +12,15 @@ class Game{
 		
 	public:
 		
+		//double &ShipXPosAdd;
 		Game();
 		void run(int argc, char **argv);
 		void GameLoop();
 		void Reshape(int w, int h);
 		long getTime();	
 		void setMyShipX(double myS);
-		void setPlayerAddress(Player);
+		void setPlayerAdd(Player&);
+		//double getGShipXPosAddy();
 		~Game();
 	
 	

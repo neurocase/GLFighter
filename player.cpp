@@ -39,7 +39,7 @@ time_t dTime;
 
 Player::Player()
 {	
-	ShipXPos = 0;
+	ShipXPos = 1;
 	reloaded = true;
 	
 	
@@ -57,6 +57,18 @@ Player::laserPos Player::getLaserPos(int n)
 {
 	return (pLaserPos[n]);
 }
+
+double Player::getShipXPos()
+{
+	return ShipXPos;
+	
+}
+
+void Player::setShipXPos(double xPos)
+{
+	ShipXPos = ShipXPos + xPos;
+}
+
 
 void Player::setLaserPos(laserPos newlaser, int n, char ch)
 {
@@ -86,10 +98,7 @@ void Player::setLaserPos(laserPos newlaser, int n, char ch)
 }
 
 
-void Player::setShipXPos(double xPos)
-{
-	ShipXPos = ShipXPos + xPos;
-}
+
 
 
 void Player::fireLaser(){
@@ -118,11 +127,6 @@ void Player::fireLaser(){
 
 bool Player::isReloaded(){
 	return reloaded;
-}
-
-double Player::getShipXPos()
-{
-	return ShipXPos;
 }
 
 Player::~Player()

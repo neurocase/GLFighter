@@ -27,8 +27,11 @@
 
 
 Game GameHeart;
-Player Play;
-static double myShipX = Play.getShipXPos();
+//Player Play;
+//static double myShipX = Play.getShipXPos();
+//double *shipXPosA = &GameHeart.getGShipXPosAddy();
+//double* shipXPosP = &shipXPosA;
+//double shipXtemp = *&shipXPosA;
 
 struct laserPos
 {
@@ -45,22 +48,31 @@ void onKeyPress(unsigned char key, int x, int y) {
 }
 
 void onSpecialKeyPress(int key, int x, int y) {
-	std::cout << "SpKey : " << key << std::endl;
+	//std::cout << "SpKey : " << key << std::endl;
+	//std::cout << "&shipXPosA : " << &GameHeart.getGShipXPosAddy() << std::endl;
+	//std::cout << "GameHeart.getGShipXPosAddy()" << GameHeart.getGShipXPosAddy() << std::endl;
+	//std::cout << "shipXPosA : " << *shipXPosA << std::endl;
+	//std::cout << "*shipXPosP : " << *shipXPosP << std::endl;
+	//std::cout << "shipXPosP : " << shipXPosA << std::endl;
 	
+	//double shipXtemp = GameHeart.getGShipXPosAddy();
 	if (key == GLUT_KEY_LEFT){
-		Play.setShipXPos(-0.15);
+		GameHeart.setMyShipX(-0.1);
 	}else if (key == GLUT_KEY_RIGHT){
-		Play.setShipXPos(0.15);
+		GameHeart.setMyShipX(0.1);
 	}else if (key == GLUT_KEY_UP){
 
-		Play.fireLaser();
+		//Play.fireLaser();
 		
-	}/*else if (key == GLUT_KEY_DOWN){
+	}
+	
+	
+	/*else if (key == GLUT_KEY_DOWN){
 	 
 		//Play.fireMisl
 	}*/
-	myShipX = Play.getShipXPos();
-	GameHeart.setMyShipX(myShipX);
+	//myShipX = Play.getShipXPos();
+	//GameHeart.setMyShipX(myShipX);
 	
 }
 void display() {
