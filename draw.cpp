@@ -1,6 +1,4 @@
-#include <GL/glut.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include "openGL.h"
 #include "game.h"
 #include "draw.h"
 #include "alien.h"
@@ -68,10 +66,10 @@ double s = 0.04;
 void Draw::DrawAlien(double alX, double alY, double rot)
 {
 	
-	double alXt [3] {-0.1, 0.1, 0};
-	double alYt [3] {0.1, 0.1, -0.1};
-	double tmpalXt [3] {alXt[0],alXt[1],alXt[2]};
-	double tmpalYt [3] {alYt[0],alYt[1],alYt[2]};
+	double alXt[3] = {-0.1, 0.1, 0};
+	double alYt[3] = {0.1, 0.1, -0.1};
+	double tmpalXt[3] = {alXt[0],alXt[1],alXt[2]};
+	double tmpalYt[3] = {alYt[0],alYt[1],alYt[2]};
 		
 	for (int i = 0; i < 3; i++)
 	{
