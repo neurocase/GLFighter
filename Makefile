@@ -1,17 +1,27 @@
 CC=g++
 CFLAGS=-c -Wall 
-LDFLAGS= -lGL -lglut
-SOURCES=main.cpp game.cpp game.h draw.cpp draw.h alien.cpp alien.h player.h player.cpp
+HEADERS=game.h draw.h alien.h player.h opengl.h
+SOURCES=main.cpp game.cpp draw.cpp alien.cpp player.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=run
 
-all: $(SOURCES) $(EXECUTABLE) -lGL -lglut
+UNAME := $(shell uname)
+ifeq ($(UNAME), Linux)
+LDFLAGS= -lGL -lglut
+endif
+ifeq ($(UNAME), Darwin)
+LDFLAGS= -framework OpenGL -framework GLUT
+endif
+
+all: $(SOURCES) $(EXECUTABLE)
 	
 $(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(LDFLAGS) $(OBJECTS) -lGL -lglut -o $@
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
 	rm -f *.gch *.o run
+
+.PHONY: clean
