@@ -35,6 +35,10 @@ Game::Game()
 	return a;
 }*/
 
+Player* Game::getPlayer() {
+	return &Playr;
+}
+
 void Game::setMyShipX(double myS)
 {
 	std::cout << "setting myS" << myS << std::endl;
