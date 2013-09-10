@@ -20,6 +20,7 @@ class Game{
 		long getTime();	
 		void setMyShipX(double myS);
 		void setPlayerAdd(Player&);
+		Player* getPlayer();
 		//double getGShipXPosAddy();
 		~Game();
 	

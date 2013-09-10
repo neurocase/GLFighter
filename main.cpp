@@ -54,10 +54,12 @@ void onSpecialKeyPress(int key, int x, int y) {
 	//std::cout << "shipXPosP : " << shipXPosA << std::endl;
 	
 	//double shipXtemp = GameHeart.getGShipXPosAddy();
+	
+	Player* Playr = GameHeart.getPlayer();
 	if (key == GLUT_KEY_LEFT){
-		GameHeart.setMyShipX(-0.1);
+		Playr->setShipXPos(-0.1);
 	}else if (key == GLUT_KEY_RIGHT){
-		GameHeart.setMyShipX(0.1);
+		Playr->setShipXPos(0.1);
 	}else if (key == GLUT_KEY_UP){
 
 		//Play.fireLaser();
