@@ -10,7 +10,7 @@ ifeq ($(UNAME), Linux)
 LDFLAGS= -lGL -lglut -lboost_system -lboost_timer
 endif
 ifeq ($(UNAME), Darwin)
-LDFLAGS= -framework OpenGL -framework GLUT
+LDFLAGS= -framework OpenGL -framework GLUT -lboost_system-mt -lboost_timer-mt
 endif
 
 all: $(SOURCES) $(EXECUTABLE)
