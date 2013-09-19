@@ -20,6 +20,7 @@ int totAst = 25;
 
 Timer mytime;
 
+double previousTime = 0;
 double startTime = 0;
 double holdTime = 0;
 double lastFireTime = 0;
@@ -94,7 +95,11 @@ void Game::GameLoop()
 	}
 	
 	nowTime = mytime.getTime();
-	//std::cout << nowTime;
+    double delta = nowTime - previousTime;
+    // std::cout << delta << std::endl;
+    //TODO:fix the speed constants where delta is used
+    //a tempoary fix is to adjust the delta time directly
+    delta = delta * 10;
 	
 	/*
 	 *  ULTIMATELY WANT TO REPLACE THE FOLLOWING "SPAWN" SECTIONS OF CODE
@@ -145,10 +150,10 @@ void Game::GameLoop()
       {
         if ((anyLaser[i].isGoUp) && (life > 0))
         {
-          ly += 0.1;
+          ly += 0.1 * delta;
           draweth.DrawLaser(lx, ly);
         }else{
-          ly -= 0.05;
+          ly -= 0.05 * delta;
           draweth.DrawAlLaser(lx, ly);
           
         }
@@ -160,9 +165,9 @@ void Game::GameLoop()
     }
 	
 	if ((Playr.getDirection() == 1) && (playerX < 1.3)){
-		playerX+=0.03;
+		playerX+=0.03 * delta;
 	}else if ((Playr.getDirection() == -1) && (playerX > -1.3)){
-		playerX -=0.03;
+		playerX -=0.03 * delta;
 	}
 	
 		for (int j = 0; j < anyLaser.size(); j++)
@@ -202,7 +207,7 @@ void Game::GameLoop()
 		double myAstPosY = ast.getAstPosY();
 		if (ast.isAstAlive){
 		double myRot = ast.getAstRot();
-		myAstPosY-=0.03;
+		myAstPosY-=0.03*delta;
 		ast.setAstPos(myAstPosX,myAstPosY);
 			
     			for (int j = 0; j < anyLaser.size(); j++)
@@ -244,13 +249,13 @@ void Game::GameLoop()
 				life--;
 			}
 	
-		myRot+=0.1;
+		myRot+=0.1 * delta;
 		ast.setAstRot(myRot);
 			
 		draweth.DrawAsteroid(myAstPosX, myAstPosY, myRot);
 
 		}else if (ast.AstExplo < 0.3){
-			ast.AstExplo += 0.01; 
+			ast.AstExplo += 0.01 * delta; 
 			draweth.DrawExplosion(myAstPosX, myAstPosY, ast.AstExplo);
 		}
 	}	
@@ -267,7 +272,7 @@ void Game::GameLoop()
 		{
 			double myRot = alien.getAlienRot();
 			
-			myRot-=0.1;
+			myRot-=0.1*delta;
   //CHECKING IF ALIEN IS HIT BY LASER
 			for (int j = 0; j < anyLaser.size(); j++)
 			{
@@ -322,12 +327,13 @@ void Game::GameLoop()
 			draweth.DrawAlien(myAlPosX, myAlPosY, c);
 
 		} else if (alien.alienExplo < 0.3){
-			alien.alienExplo += 0.01; 
+			alien.alienExplo += 0.01 * delta; 
 			draweth.DrawExplosion(myAlPosX, myAlPosY, alien.alienExplo);
 		}
 		moveAlienX(alien);
 
 	}	
+    previousTime = nowTime;
 	glutSwapBuffers();
 }
 
