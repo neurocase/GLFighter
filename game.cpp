@@ -131,7 +131,7 @@ void Game::GameLoop()
 
 
 	
-	    // LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER   
+	    // LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER   LASER  LASER   LASER   LASER   
     double charge = (nowTime - lastFireTime);
     draweth.DrawCharge(charge);
     
@@ -143,7 +143,7 @@ void Game::GameLoop()
       double lx = anyLaser[i].lx;
       if(anyLaser[i].isActive)
       {
-        if (anyLaser[i].isGoUp)
+        if ((anyLaser[i].isGoUp) && (life > 0))
         {
           ly += 0.1;
           draweth.DrawLaser(lx, ly);
