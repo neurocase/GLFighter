@@ -18,6 +18,8 @@ int totAl = 25;
 int spwnedAst = 0;
 int totAst = 25;
 
+double moveRate = 0.5;
+
 Timer mytime;
 
 double previousTime = 0;
@@ -73,7 +75,7 @@ void moveAlienX(Alien& alien){
 }
 
 void Game::PlayerShoot(){
-	if ((nowTime - lastFireTime)  > 1)
+	if ((nowTime - lastFireTime)  > 1 && (life > 0))
 	{
 		std::cout << "player shoots";
 		lastFireTime=nowTime;
@@ -150,10 +152,10 @@ void Game::GameLoop()
       {
         if ((anyLaser[i].isGoUp) && (life > 0))
         {
-          ly += 0.1 * delta;
+          ly += moveRate * delta;
           draweth.DrawLaser(lx, ly);
         }else{
-          ly -= 0.05 * delta;
+          ly -= moveRate * delta;
           draweth.DrawAlLaser(lx, ly);
           
         }
@@ -165,9 +167,9 @@ void Game::GameLoop()
     }
 	
 	if ((Playr.getDirection() == 1) && (playerX < 1.3)){
-		playerX+=0.03 * delta;
+		playerX+= 0.35 * delta;
 	}else if ((Playr.getDirection() == -1) && (playerX > -1.3)){
-		playerX -=0.03 * delta;
+		playerX -= 0.35 * delta;
 	}
 	
 		for (int j = 0; j < anyLaser.size(); j++)
@@ -207,7 +209,7 @@ void Game::GameLoop()
 		double myAstPosY = ast.getAstPosY();
 		if (ast.isAstAlive){
 		double myRot = ast.getAstRot();
-		myAstPosY-=0.03*delta;
+		myAstPosY-=0.25*delta;
 		ast.setAstPos(myAstPosX,myAstPosY);
 			
     			for (int j = 0; j < anyLaser.size(); j++)
@@ -249,13 +251,13 @@ void Game::GameLoop()
 				life--;
 			}
 	
-		myRot+=0.1 * delta;
+		myRot+= moveRate * delta;
 		ast.setAstRot(myRot);
 			
 		draweth.DrawAsteroid(myAstPosX, myAstPosY, myRot);
 
 		}else if (ast.AstExplo < 0.3){
-			ast.AstExplo += 0.01 * delta; 
+			ast.AstExplo += 0.1 * delta; 
 			draweth.DrawExplosion(myAstPosX, myAstPosY, ast.AstExplo);
 		}
 	}	
@@ -315,7 +317,7 @@ void Game::GameLoop()
 			
 			char c = 'g';
 			//  IF ALIEN X POS = PLAYXPOS ALIEN SHOOT
-			if (std::abs(myAlPosX - playerX) < 0.2) {
+			if ((std::abs(myAlPosX - playerX) < 0.2) && (life > 0)) {
 				if ((nowTime - alienLastShootTime) > 1){
 					std::cout << "alien shoots" << std::endl;
           anyLaser.push_back(Laser(myAlPosX, myAlPosY, false));
@@ -327,7 +329,7 @@ void Game::GameLoop()
 			draweth.DrawAlien(myAlPosX, myAlPosY, c);
 
 		} else if (alien.alienExplo < 0.3){
-			alien.alienExplo += 0.01 * delta; 
+			alien.alienExplo += 0.1 * delta; 
 			draweth.DrawExplosion(myAlPosX, myAlPosY, alien.alienExplo);
 		}
 		moveAlienX(alien);

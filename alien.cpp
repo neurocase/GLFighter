@@ -15,7 +15,7 @@ static Timer dtime;
 Alien::Alien(){
 	isAlienAlive = true;
 	//AlienX = -0.9 + rand() % 2 *1.5;
-  AlienX = ((((rand() % 100) *0.01) *2.6)-1.3);
+  AlienX = ((((rand() % 100) *0.01) *2.6)-1.25);
 	AlienY = 2;
 	AlienRot = 0;
 	AlMovSpeed = 0.03;
